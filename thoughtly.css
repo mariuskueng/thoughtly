@@ -1,0 +1,30 @@
+/* CSS declarations go here */
+
+body{
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 200;
+}
+h2{
+    font-size: 16px;
+    font-weight: 200;
+}
+.submit{
+    display: block;
+}
+.date{
+    color: #BCBCBC;
+}
+.text{
+    font-size: 20px;
+    width: 85%;
+}
+.post{
+    position: relative;
+}
+.delete{
+    position: absolute;
+    right: 0;
+}
+hr{
+    clear:both;
+}
