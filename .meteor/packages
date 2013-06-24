@@ -6,4 +6,6 @@
 autopublish
 preserve-inputs
 bootstrap
+accounts-ui
+accounts-twitter
 insecure

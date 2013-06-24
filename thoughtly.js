@@ -3,9 +3,17 @@ Posts = new Meteor.Collection('posts');
 if (Meteor.isClient) {
   Template.posts.helpers({
     posts: function() {
-      return Posts.find({}, {sort: [["created_at", "desc"]]});
-    }
+        return Posts.find({user: Meteor.user()}, {sort: [["created_at", "desc"]]});
+      }
   });
+  Template.posts.user = function(){
+    if (Meteor.user()) {
+      return true;
+    }
+    else{
+      return false;
+    }
+  };
   Template.posts.events = {
     'click .submit': function (e){
       e.preventDefault(); //don't submit the form
@@ -17,7 +25,8 @@ if (Meteor.isClient) {
 
       Posts.insert({
         text: post.val().replace(/\r?\n/g, '<br />'),
-        created_at: parseInt(date.getTime() / 1000, 10)
+        created_at: parseInt(date.getTime() / 1000, 10),
+        user: Meteor.user()
       });
       post.val('');
     },
@@ -34,4 +43,13 @@ if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
   });
+
+  Posts.allow({
+      'insert': function(userId, doc) {
+        return true;
+      },
+      'remove': function(userId, doc) {
+        return false;
+      }
+    });
 }

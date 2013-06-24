@@ -2,32 +2,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>thoughtly</title>
-    <script type="text/javascript" src="https://raw.github.com/timrwood/moment/2.0.0/min/moment.min.js"></script>
+    <script type="text/javascript" src="./moment.min.js"></script>
 </head>
 
 <body>
     <div class="row-fluid">
         <div class="span12">
-            {{> posts}}
+            <div class="container">
+                <h1>thoughtly</h1>
+                <h2>A private twitter for your thoughts</h2>
+                <p>{{loginButtons}}</p>
+                {{> posts}}
+            </div>
         </div>
     </div>
 </body>
 
 <template name="posts">
-    <div class="container">
-        <h1>thoughtly</h1>
-        <h2>A private twitter for your thoughts</h2>
-    <form>
-        <textarea class="post" rows="10"></textarea>
-        <button class="btn submit">Post</button>
-    </form>
-    </div>
-    {{#each posts}}
-      <div class="post container">
-        <p class="date">{{ date }}</p>
-        <p class="text pull-left">{{{text}}}</p>
-        <button class="delete btn btn-danger btn-mini pull-right">remove</button>
-        <hr>
-      </div>
-    {{/each}}
+    {{#if user}}
+        <div class="container">
+            <form>
+                <textarea class="post" rows="10"></textarea>
+                <button class="btn submit">Post</button>
+            </form>
+        </div>
+        {{#each posts}}
+          <div class="post container">
+            <p class="date">{{ date }}</p>
+            <p class="text pull-left">{{{text}}}</p>
+            <button class="delete btn btn-danger btn-mini pull-right">remove</button>
+            <hr>
+          </div>
+        {{/each}}
+    {{ else }}
+        <p>Please log in.</p>
+    {{/if}}
 </template>
