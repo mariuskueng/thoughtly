@@ -29,9 +29,6 @@ if (Meteor.isClient) {
         user: Meteor.user()
       });
       post.val('');
-    },
-    'click .delete': function(e){
-      Posts.remove(this._id);
     }
   };
   Handlebars.registerHelper('date', function(context){
@@ -49,7 +46,7 @@ if (Meteor.isServer) {
         return true;
       },
       'remove': function(userId, doc) {
-        return false;
+        return true;
       }
     });
 }
